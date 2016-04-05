@@ -40,6 +40,7 @@ public class MyRecyclerViewAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
+            if(myClickListener!=null)
             myClickListener.onItemClick(getPosition(), v);
         }
     }

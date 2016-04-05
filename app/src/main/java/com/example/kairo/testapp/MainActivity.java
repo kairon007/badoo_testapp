@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,45 +28,59 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private static String LOG_TAG = "RecyclerViewActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-setupList();
+        setupList();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Welcome", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
     }
-public void setupList(){
-    mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-    mRecyclerView.setHasFixedSize(true);
-    mLayoutManager = new LinearLayoutManager(this);
-    mRecyclerView.setLayoutManager(mLayoutManager);
-    InputStream inputStream = this.getResources().openRawResource(R.raw.amit);
-    String jsonString = readJsonFile(inputStream);
 
-    Gson gson = new Gson();
-    Videoz mVideos = gson.fromJson(jsonString, Videoz.class);
-    mAdapter = new MyRecyclerViewAdapter(mVideos.getVideos());
-    mRecyclerView.setAdapter(mAdapter);
-    RecyclerView.ItemDecoration itemDecoration =
-            new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
-    mRecyclerView.addItemDecoration(itemDecoration);
+    public void setupList() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        InputStream inputStream = this.getResources().openRawResource(R.raw.amit);
+        String jsonString = readJsonFile(inputStream);
 
-    // Code to Add an item with default animation
-    //((MyRecyclerViewAdapter) mAdapter).addItem(obj, index);
+        Gson gson = new Gson();
+        Videoz mVideos = gson.fromJson(jsonString, Videoz.class);
+        mAdapter = new MyRecyclerViewAdapter(mVideos.getVideos());
+        mRecyclerView.setAdapter(mAdapter);
+        RecyclerView.ItemDecoration itemDecoration =
+                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL);
+        mRecyclerView.addItemDecoration(itemDecoration);
 
-    // Code to remove an item with default animation
-    //((MyRecyclerViewAdapter) mAdapter).deleteItem(index);
-}
-    public void parseJson(){
+        // Code to Add an item with default animation
+        //((MyRecyclerViewAdapter) mAdapter).addItem(obj, index);
+
+        // Code to remove an item with default animation
+        //((MyRecyclerViewAdapter) mAdapter).deleteItem(index);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapter.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Log.i(LOG_TAG, " Clicked on Item " + position);
+            }
+        });
+    }
+
+    public void parseJson() {
         //Reading source from local file
         InputStream inputStream = this.getResources().openRawResource(R.raw.amit);
         String jsonString = readJsonFile(inputStream);
@@ -74,6 +89,7 @@ public void setupList(){
         Videoz mVideos = gson.fromJson(jsonString, Videoz.class);
 
     }
+
     private String readJsonFile(InputStream inputStream) {
 // TODO Auto-generated method stub
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -91,6 +107,7 @@ public void setupList(){
         }
         return outputStream.toString();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

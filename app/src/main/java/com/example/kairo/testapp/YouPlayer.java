@@ -12,6 +12,9 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Amit Kairon on 4/9/2016.
  */
@@ -19,20 +22,31 @@ public class YouPlayer extends YouTubeBaseActivity implements YouTubePlayer.OnIn
 
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
-
+String final_url="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.youtube_view);
-
+String received_url = getIntent().getExtras().getString("video");
+        final_url = decodeYoutubeUrl(received_url);
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.API_KEY, this);
     }
+public String decodeYoutubeUrl(String url){
 
+    String pattern = "(?<=watch\\?v=|/videos/|embed\\/|youtu.be\\/|\\/v\\/|\\/e\\/|watch\\?v%3D|watch\\?feature=player_embedded&v=|%2Fvideos%2F|embed%\u200C\u200B2F|youtu.be%2F|%2Fv%2F)[^#\\&\\?\\n]*";
+
+    Pattern compiledPattern = Pattern.compile(pattern);
+    Matcher matcher = compiledPattern.matcher(url); //url is youtube url for which you want to extract the id.
+    if (matcher.find()) {
+        return matcher.group();
+    }
+    return null;
+}
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
-            player.cueVideo("fhWaJi1Hsfo"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+            player.cueVideo(final_url); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
         }
     }
 

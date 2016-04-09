@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.kairo.testapp.adapters.MyRecyclerViewAdapter;
 import com.example.kairo.testapp.models.DividerItemDecoration;
@@ -137,7 +138,14 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(int position, View v) {
                 Log.i(LOG_TAG, " Clicked on Item " + position);
-                startActivity(new Intent(getApplicationContext(),YouPlayer.class));
+                Intent i = new Intent(getApplicationContext(),YouPlayer.class);
+                if(mTotalList.get(position).getVideo()!=null){
+                    i.putExtra("video",mTotalList.get(position).getVideo());
+                    startActivity(i);
+                }else{
+                    Toast.makeText(getApplicationContext(),"No Video",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

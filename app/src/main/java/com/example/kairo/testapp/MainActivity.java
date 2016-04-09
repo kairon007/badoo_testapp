@@ -1,5 +1,6 @@
 package com.example.kairo.testapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(int position, View v) {
                 Log.i(LOG_TAG, " Clicked on Item " + position);
+                startActivity(new Intent(getApplicationContext(),YouPlayer.class));
             }
         });
     }

@@ -44,7 +44,11 @@ public class RatesParser {
             Currency to = new Currency(rate.getTo());
             rateGraph.addVertex(from);
             rateGraph.addVertex(to);
-            rateGraph.addEdge(from, to, rate);
+            rateGraph.addEdge(from, to, rate); // -TODO- Should we handle duplicate rate entries that may be inconsistent?
+            /**
+             * -TODO- Assumpution : NOT taking a forward conversion => 1/backward conversion. So, this would miss some rates
+             * It can be solved by adding a reverse for each directed edge above
+             */
         }
 
         // 2. Do a BFS and get derived or direct rates for GBP

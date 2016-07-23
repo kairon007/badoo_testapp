@@ -1,4 +1,4 @@
-package com.example.kairo.testapp;
+package com.badoo.testapp;
 
 import org.junit.Test;
 

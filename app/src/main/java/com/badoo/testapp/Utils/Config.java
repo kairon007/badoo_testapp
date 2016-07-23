@@ -1,4 +1,4 @@
-package com.example.kairo.testapp.Utils;
+package com.badoo.testapp.Utils;
 
 /**
  * Created by Amit Kairon on 4/9/2016.

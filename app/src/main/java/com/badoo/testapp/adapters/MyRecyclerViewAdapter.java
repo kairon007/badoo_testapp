@@ -1,4 +1,4 @@
-package com.example.kairo.testapp.adapters;
+package com.badoo.testapp.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -9,9 +9,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import com.example.kairo.testapp.R;
-import com.example.kairo.testapp.models.DataObject;
-import com.example.kairo.testapp.models.Videoz;
+import com.badoo.testapp.R;
+import com.badoo.testapp.models.Videoz;
 
 import java.util.ArrayList;
 import java.util.List;

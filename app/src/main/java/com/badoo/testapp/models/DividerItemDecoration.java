@@ -1,4 +1,4 @@
-package com.example.kairo.testapp.models;
+package com.badoo.testapp.models;
 
 import android.content.Context;
 import android.content.res.TypedArray;

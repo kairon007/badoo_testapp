@@ -1,4 +1,4 @@
-package com.example.kairo.testapp.Utils;
+package com.badoo.testapp.Utils;
 
 import android.net.Uri;
 import android.util.Log;

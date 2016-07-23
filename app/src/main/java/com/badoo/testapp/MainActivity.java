@@ -1,4 +1,4 @@
-package com.example.kairo.testapp;
+package com.badoo.testapp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +9,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.kairo.testapp.adapters.MyRecyclerViewAdapter;
-import com.example.kairo.testapp.models.DividerItemDecoration;
-import com.example.kairo.testapp.models.Videoz;
+import com.badoo.testapp.adapters.MyRecyclerViewAdapter;
+import com.badoo.testapp.models.DividerItemDecoration;
+import com.badoo.testapp.models.Videoz;
 import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
@@ -26,8 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit.client.Response;
 
 public class MainActivity extends AppCompatActivity implements
         SearchView.OnQueryTextListener {

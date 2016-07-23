@@ -1,4 +1,4 @@
-package com.example.kairo.testapp.models;
+package com.badoo.testapp.models;
 
 /**
  * Created by kairon on 4/5/2016.
